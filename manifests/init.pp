@@ -46,12 +46,12 @@ class nginx {
     source  => 'puppet:///modules/nginx/config/nginx/public'
   }
 
-  homebrew::formula { 'nginx':
-    before => Package['boxen/brews/nginx'],
+  homebrew::formula { 'openresty':
+    before => Package['boxen/brews/openresty'],
   }
 
-  package { 'boxen/brews/nginx':
-    ensure => '1.2.7-boxen1',
+  package { 'boxen/brews/openresty':
+    ensure => '1.2.8.6-boxen1',
     notify => Service['dev.nginx']
   }
 
@@ -61,11 +61,11 @@ class nginx {
     ensure  => absent,
     force   => true,
     recurse => true,
-    require => Package['boxen/brews/nginx']
+    require => Package['boxen/brews/openresty']
   }
 
   service { 'dev.nginx':
     ensure  => running,
-    require => Package['boxen/brews/nginx']
+    require => Package['boxen/brews/openresty']
   }
 }
